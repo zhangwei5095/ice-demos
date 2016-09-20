@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -13,8 +13,8 @@ public class HelloPluginI : Ice.Plugin
 
     public void initialize()
     {
-        Ice.ObjectAdapter adapter = _communicator.createObjectAdapter("Hello");
-        adapter.add(new HelloI(), _communicator.stringToIdentity("hello"));
+        var adapter = _communicator.createObjectAdapter("Hello");
+        adapter.add(new HelloI(), Ice.Util.stringToIdentity("hello"));
         adapter.activate();
     }
 

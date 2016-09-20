@@ -1,16 +1,15 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
-public class Server extends Ice.Application
+public class Server extends com.zeroc.Ice.Application
 {
     class ShutdownHook extends Thread
     {
         @Override
-        public void
-        run()
+        public void run()
         {
             _workQueue._destroy();
             communicator().shutdown();
@@ -18,8 +17,7 @@ public class Server extends Ice.Application
     }
 
     @Override
-    public int
-    run(String[] args)
+    public int run(String[] args)
     {
         if(args.length > 0)
         {
@@ -29,9 +27,9 @@ public class Server extends Ice.Application
 
         setInterruptHook(new ShutdownHook());
 
-        Ice.ObjectAdapter adapter = communicator().createObjectAdapter("Hello");
+        com.zeroc.Ice.ObjectAdapter adapter = communicator().createObjectAdapter("Hello");
         _workQueue = new WorkQueue();
-        adapter.add(new HelloI(_workQueue), communicator().stringToIdentity("hello"));
+        adapter.add(new HelloI(_workQueue), com.zeroc.Ice.Util.stringToIdentity("hello"));
         _workQueue.start();
         adapter.activate();
 
@@ -48,8 +46,7 @@ public class Server extends Ice.Application
         return 0;
     }
 
-    public static void
-    main(String[] args)
+    public static void main(String[] args)
     {
         Server app = new Server();
         int status = app.main("Server", args, "config.server");

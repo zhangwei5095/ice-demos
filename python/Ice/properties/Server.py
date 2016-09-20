@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -61,7 +61,7 @@ class Server(Ice.Application):
         admin.addUpdateCallback(servant);
 
         adapter = self.communicator().createObjectAdapter("Props")
-        adapter.add(servant, self.communicator().stringToIdentity("props"))
+        adapter.add(servant, Ice.stringToIdentity("props"))
         adapter.activate()
         self.communicator().waitForShutdown()
         return 0

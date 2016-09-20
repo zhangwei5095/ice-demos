@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -45,7 +45,7 @@ FilesystemI::NodeI::NodeI(const string& nm, const DirectoryIPtr& parent)
     //
     if(parent != 0)
     {
-        _id.name = IceUtil::generateUUID();
+        _id.name = Ice::generateUUID();
     }
     else
     {

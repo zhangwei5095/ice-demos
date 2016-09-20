@@ -2,7 +2,7 @@
 
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -70,7 +70,7 @@ class Session
             //
             if($this->_communicator->getProperties()->getProperty("PollingChatSessionFactory.OverrideEndpoints") != "")
             {
-                $ident = $this->_communicator->identityToString($this->_chatsession->ice_getIdentity());
+                $ident = Ice_identityToString($this->_chatsession->ice_getIdentity());
                 $endpoints = $this->_communicator->getProperties()->getProperty(
                     "PollingChatSessionFactory.OverrideEndpoints");
                 $this->_chatsession = $this->_communicator->stringToProxy(

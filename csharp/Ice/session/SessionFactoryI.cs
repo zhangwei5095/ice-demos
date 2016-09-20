@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -16,8 +16,8 @@ public class SessionFactoryI : SessionFactoryDisp_
 
     public override SessionPrx create(string name, Ice.Current c)
     {
-        SessionI session = new SessionI(name);
-        SessionPrx proxy = SessionPrxHelper.uncheckedCast(c.adapter.addWithUUID(session));
+        var session = new SessionI(name);
+        var proxy = SessionPrxHelper.uncheckedCast(c.adapter.addWithUUID(session));
         _reaper.add(proxy, session);
         return proxy;
     }

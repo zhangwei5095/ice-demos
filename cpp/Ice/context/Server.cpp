@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -38,7 +38,7 @@ ContextServer::run(int argc, char*[])
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Context");
     Demo::ContextPtr hello = new ContextI;
-    adapter->add(hello, communicator()->stringToIdentity("context"));
+    adapter->add(hello, Ice::stringToIdentity("context"));
     adapter->activate();
     communicator()->waitForShutdown();
     return EXIT_SUCCESS;

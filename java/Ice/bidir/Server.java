@@ -1,14 +1,13 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
-public class Server extends Ice.Application
+public class Server extends com.zeroc.Ice.Application
 {
     @Override
-    public int
-    run(String[] args)
+    public int run(String[] args)
     {
         if(args.length > 0)
         {
@@ -16,9 +15,9 @@ public class Server extends Ice.Application
             return 1;
         }
 
-        Ice.ObjectAdapter adapter = communicator().createObjectAdapter("Callback.Server");
+        com.zeroc.Ice.ObjectAdapter adapter = communicator().createObjectAdapter("Callback.Server");
         CallbackSenderI sender = new CallbackSenderI(communicator());
-        adapter.add(sender, communicator().stringToIdentity("sender"));
+        adapter.add(sender, com.zeroc.Ice.Util.stringToIdentity("sender"));
         adapter.activate();
 
         Thread t = new Thread(sender);
@@ -43,8 +42,7 @@ public class Server extends Ice.Application
         return 0;
     }
 
-    public static void
-    main(String[] args)
+    public static void main(String[] args)
     {
         Server app = new Server();
         int status = app.main("Server", args, "config.server");

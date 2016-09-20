@@ -1,31 +1,30 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 import Demo.*;
 
-public class DiscoverI extends _DiscoverDisp
+public class DiscoverI implements Discover
 {
-    DiscoverI(Ice.ObjectPrx obj)
+    DiscoverI(com.zeroc.Ice.ObjectPrx obj)
     {
         _obj = obj;
     }
 
     @Override
-    public void
-    lookup(DiscoverReplyPrx reply, Ice.Current current)
+    public void lookup(DiscoverReplyPrx reply, com.zeroc.Ice.Current current)
     {
         try
         {
             reply.reply(_obj);
         }
-        catch(Ice.LocalException ex)
+        catch(com.zeroc.Ice.LocalException ex)
         {
             // Ignore
         }
     }
 
-    private Ice.ObjectPrx _obj;
+    private com.zeroc.Ice.ObjectPrx _obj;
 }

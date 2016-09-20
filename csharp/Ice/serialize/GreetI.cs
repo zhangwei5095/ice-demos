@@ -1,10 +1,11 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 using Demo;
+using System;
 
 public class GreetI : GreetDisp_
 {
@@ -12,17 +13,17 @@ public class GreetI : GreetDisp_
     {
         if(greeting != null)
         {
-            System.Console.Out.WriteLine(greeting.text);
+            Console.Out.WriteLine(greeting.text);
         }
         else
         {
-            System.Console.Out.WriteLine("Received null greeting!");
+            Console.Out.WriteLine("Received null greeting!");
         }
     }
     
     public override void shutdown(Ice.Current current)
     {
-        System.Console.Out.WriteLine("Shutting down...");
+        Console.Out.WriteLine("Shutting down...");
         current.adapter.getCommunicator().shutdown();
     }
 }

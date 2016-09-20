@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -78,7 +78,7 @@ HelloServer::run(int argc, char* argv[])
 
     Ice::ObjectPrx hello = adapter->addWithUUID(new HelloI);
     DiscoverPtr d = new DiscoverI(hello);
-    discoverAdapter->add(d, communicator()->stringToIdentity("discover"));
+    discoverAdapter->add(d, Ice::stringToIdentity("discover"));
 
     discoverAdapter->activate();
     adapter->activate();

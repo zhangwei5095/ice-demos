@@ -1,18 +1,16 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 #pragma once
 
 #include <Glacier2/Session.ice>
+#include <Library.ice>
 
 module Demo
 {
-
-/* Forward declaration. */
-interface Library;
 
 /**
  *

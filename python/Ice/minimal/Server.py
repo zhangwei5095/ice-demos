@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -17,7 +17,7 @@ class HelloI(Demo.Hello):
 try:
     communicator = Ice.initialize(sys.argv)
     adapter = communicator.createObjectAdapterWithEndpoints("Hello", "default -h localhost -p 10000")
-    adapter.add(HelloI(), communicator.stringToIdentity("hello"))
+    adapter.add(HelloI(), Ice.stringToIdentity("hello"))
     adapter.activate()
     communicator.waitForShutdown()
     communicator.destroy()

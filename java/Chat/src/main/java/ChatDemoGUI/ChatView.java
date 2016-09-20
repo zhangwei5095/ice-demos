@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -105,6 +105,7 @@ public class ChatView extends JPanel
                     JScrollBar vertivalScrollbar = _conversationTextScroll.getVerticalScrollBar();
                     vertivalScrollbar.setValue(vertivalScrollbar.getMaximum());
                 }
+
                 public void  componentHidden(ComponentEvent e)
                 {
                 }

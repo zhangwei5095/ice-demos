@@ -1,22 +1,20 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 import Demo.*;
 
-public class Publisher extends Ice.Application
+public class Publisher extends com.zeroc.Ice.Application
 {
-    public void
-    usage()
+    public void usage()
     {
         System.out.println("Usage: " + appName() + " [--datagram|--twoway|--oneway] [topic]");
     }
 
     @Override
-    public int
-    run(String[] args)
+    public int run(String[] args)
     {
         String option = "None";
         String topicName = "time";
@@ -61,7 +59,7 @@ public class Publisher extends Ice.Application
             return 1;
         }
 
-        IceStorm.TopicManagerPrx manager = IceStorm.TopicManagerPrxHelper.checkedCast(
+        com.zeroc.IceStorm.TopicManagerPrx manager = com.zeroc.IceStorm.TopicManagerPrx.checkedCast(
             communicator().propertyToProxy("TopicManager.Proxy"));
         if(manager == null)
         {
@@ -72,34 +70,29 @@ public class Publisher extends Ice.Application
         //
         // Retrieve the topic.
         //
-        IceStorm.TopicPrx topic;
+        com.zeroc.IceStorm.TopicPrx topic;
         try
         {
             topic = manager.retrieve(topicName);
         }
-        catch(IceStorm.NoSuchTopic e)
+        catch(com.zeroc.IceStorm.NoSuchTopic e)
         {
             try
             {
                 topic = manager.create(topicName);
             }
-            catch(IceStorm.TopicExists ex)
+            catch(com.zeroc.IceStorm.TopicExists ex)
             {
                 System.err.println(appName() + ": temporary failure, try again.");
                 return 1;
             }
-	    catch(IceStorm.InvalidTopic ex)
-    	    {
-                System.err.println(appName() + ": invalid topic: " + ex.reason);
-                return 1;
-	    }
         }
 
         //
         // Get the topic's publisher object, and create a Clock proxy with
         // the mode specified as an argument of this application.
         //
-        Ice.ObjectPrx publisher = topic.getPublisher();
+        com.zeroc.Ice.ObjectPrx publisher = topic.getPublisher();
         if(option.equals("Datagram"))
         {
             publisher = publisher.ice_datagram();
@@ -112,7 +105,7 @@ public class Publisher extends Ice.Application
         {
             publisher = publisher.ice_oneway();
         }
-        ClockPrx clock = ClockPrxHelper.uncheckedCast(publisher);
+        ClockPrx clock = ClockPrx.uncheckedCast(publisher);
 
         System.out.println("publishing tick events. Press ^C to terminate the application.");
         try
@@ -133,7 +126,7 @@ public class Publisher extends Ice.Application
                 }
             }
         }
-        catch(Ice.CommunicatorDestroyedException ex)
+        catch(com.zeroc.Ice.CommunicatorDestroyedException ex)
         {
             // Ignore
         }
@@ -141,8 +134,7 @@ public class Publisher extends Ice.Application
         return 0;
     }
 
-    public static void
-    main(String[] args)
+    public static void main(String[] args)
     {
         Publisher app = new Publisher();
         int status = app.main("Publisher", args, "config.pub");

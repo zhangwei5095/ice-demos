@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -61,7 +61,7 @@ class ContactServer(Ice.Application):
             return 1
 
         adapter = self.communicator().createObjectAdapter("ContactDB")
-        adapter.add(ContactDBI(), self.communicator().stringToIdentity("contactdb"))
+        adapter.add(ContactDBI(), Ice.stringToIdentity("contactdb"))
         adapter.activate()
         self.communicator().waitForShutdown()
         return 0

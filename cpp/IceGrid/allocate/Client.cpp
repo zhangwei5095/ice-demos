@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -104,7 +104,7 @@ HelloClient::run(int argc, char* argv[])
         HelloPrx hello;
         try
         {
-            hello = HelloPrx::checkedCast(session->allocateObjectById(communicator()->stringToIdentity("hello")));
+            hello = HelloPrx::checkedCast(session->allocateObjectById(Ice::stringToIdentity("hello")));
         }
         catch(const IceGrid::ObjectNotRegisteredException&)
         {

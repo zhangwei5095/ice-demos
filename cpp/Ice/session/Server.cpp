@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -43,7 +43,7 @@ SessionServer::run(int argc, char*[])
     timer->scheduleRepeated(reapTask, IceUtil::Time::seconds(1));
 
     SessionFactoryPtr factory = new SessionFactoryI(reapTask);
-    adapter->add(factory, communicator()->stringToIdentity("SessionFactory"));
+    adapter->add(factory, Ice::stringToIdentity("SessionFactory"));
     adapter->activate();
     communicator()->waitForShutdown();
 

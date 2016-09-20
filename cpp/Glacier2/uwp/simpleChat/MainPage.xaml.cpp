@@ -1,6 +1,6 @@
 ﻿// **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -136,7 +136,7 @@ Coordinator::message(const string& msg, const Ice::Current&)
 {
     try
     {
-        MainPage::instance()->appendMessage(ref new String(IceUtil::stringToWstring(msg).c_str()));
+        MainPage::instance()->appendMessage(ref new String(Ice::stringToWstring(msg).c_str()));
     }
     catch(const Ice::CommunicatorDestroyedException& ex)
     {
@@ -188,12 +188,12 @@ MainPage::setConnected(bool connected)
     String^ pageName = nullptr;
     if(connected)
     {
-        pageName = "simpleChat.ChatView";
+        pageName = "simpleChat.ChatViewPage";
         signout->Visibility =  Windows::UI::Xaml::Visibility::Visible;
     }
     else
     {
-        pageName = "simpleChat.LoginView";
+        pageName = "simpleChat.LoginViewPage";
         signout->Visibility =  Windows::UI::Xaml::Visibility::Collapsed;
     }
     TypeName page = {pageName, TypeKind::Custom};
@@ -205,7 +205,7 @@ void
 MainPage::setError(const std::string& err)
 {
     setConnected(false);
-    _loginView->setError(ref new String(IceUtil::stringToWstring(err).c_str()));
+    _loginView->setError(ref new String(Ice::stringToWstring(err).c_str()));
 }
 
 void

@@ -1,12 +1,12 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 #include <Ice/Ice.h>
 #include <ValueI.h>
-#include <ObjectFactory.h>
+#include <ValueFactory.h>
 
 using namespace std;
 
@@ -33,12 +33,12 @@ ValueServer::run(int argc, char*[])
         return EXIT_FAILURE;
     }
 
-    Ice::ObjectFactoryPtr factory = new ObjectFactory;
-    communicator()->addObjectFactory(factory, Demo::Printer::ice_staticId());
+    Ice::ValueFactoryPtr factory = new ValueFactory;
+    communicator()->getValueFactoryManager()->add(factory, Demo::Printer::ice_staticId());
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Value");
     Demo::InitialPtr initial = new InitialI(adapter);
-    adapter->add(initial, communicator()->stringToIdentity("initial"));
+    adapter->add(initial, Ice::stringToIdentity("initial"));
     adapter->activate();
     communicator()->waitForShutdown();
     return EXIT_SUCCESS;

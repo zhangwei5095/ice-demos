@@ -1,7 +1,7 @@
 <?php
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -39,7 +39,7 @@ class ClientPrinterI extends Demo\ClientPrinter
     }
 }
 
-class ObjectFactory implements Ice\ObjectFactory
+class ValueFactory implements Ice\ValueFactory
 {
     function create($type)
     {
@@ -87,9 +87,9 @@ try
     try
     {
         $initial->getPrinter($printer, $printerProxy);
-        die("Did not get the expected NoObjectFactoryException!");
+        die("Did not get the expected NoValueFactoryException!");
     }
-    catch(Ice\NoObjectFactoryException $ex)
+    catch(Ice\NoValueFactoryException $ex)
     {
         print_r($ex);
     }
@@ -101,8 +101,8 @@ try
     echo "[press enter]\n";
     fgets(STDIN);
 
-    $factory = new ObjectFactory;
-    $ICE->addObjectFactory($factory, Demo\Printer::ice_staticId());
+    $factory = new ValueFactory;
+    $ICE->getValueFactoryManager()->($factory, Demo\Printer::ice_staticId());
 
     $initial->getPrinter($printer, $printerProxy);
     echo "==> ",$printer->message,"\n";
@@ -143,7 +143,7 @@ try
     echo "[press enter]\n";
     fgets(STDIN);
 
-    $ICE->addObjectFactory($factory, Demo\DerivedPrinter::ice_staticId());
+    $ICE->getValueFactoryManager()->($factory, Demo\DerivedPrinter::ice_staticId());
 
     $derivedAsBase = $initial->getDerivedPrinter();
     assert($derivedAsBase instanceof Demo\DerivedPrinter);
@@ -171,7 +171,7 @@ try
 
     $clientp = new ClientPrinterI()
     $clientp->message = "a message 4 u"
-    $ICE->addObjectFactory($factory, Demo\ClientPrinter::ice_staticId());
+    $ICE->getValueFactoryManager()->($factory, Demo\ClientPrinter::ice_staticId());
 
     $derivedAsBase = $initial->updatePrinterMessage($clientp);
     assert($derivedAsBase instanceof Demo\ClientPrinter);

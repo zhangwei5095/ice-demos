@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -17,7 +17,7 @@ run(int argc, char* argv[], id<ICECommunicator> communicator)
         return EXIT_FAILURE;
     }
     id<ICEObjectAdapter> adapter = [communicator createObjectAdapter:@"Hello"];
-    [adapter add:[HelloI hello] identity:[communicator stringToIdentity:@"hello"]];
+    [adapter add:[HelloI hello] identity:[ICEUtil stringToIdentity:@"hello"]];
     [adapter activate];
     [communicator waitForShutdown];
     return EXIT_SUCCESS;

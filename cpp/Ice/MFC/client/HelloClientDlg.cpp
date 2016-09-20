@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -409,7 +409,7 @@ CHelloClientDlg::updateProxy()
 {
     CString h;
     _host->GetWindowText(h);
-    string host = IceUtil::wstringToString(wstring(h), IceUtil::getProcessStringConverter());
+    string host = wstringToString(wstring(h), Ice::getProcessStringConverter());
     if(host.size() == 0)
     {
         _status->SetWindowText(CString(" No hostname"));

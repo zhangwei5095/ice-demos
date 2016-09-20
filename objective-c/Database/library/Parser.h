@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -12,7 +12,7 @@
 // Stuff for flex and bison
 //
 
-#define YYSTYPE NSMutableArray*
+#define YYSTYPE ICE_STRONG_QUALIFIER NSMutableArray*
 #define YY_DECL int yylex(YYSTYPE* yylvalp)
 YY_DECL;
 int yyparse();

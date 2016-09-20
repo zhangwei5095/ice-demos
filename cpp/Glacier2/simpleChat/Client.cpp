@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -133,6 +133,7 @@ private:
     void
     menu()
     {
+        IceUtil::Mutex::Lock lock(coutMutex);
         cout << "enter /quit to exit." << endl;
     }
 

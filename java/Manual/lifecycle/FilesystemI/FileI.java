@@ -1,18 +1,17 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 package FilesystemI;
 
-import Ice.*;
+import com.zeroc.Ice.*;
 import Filesystem.*;
 
-public class FileI extends _FileDisp implements NodeI
+public class FileI implements File, NodeI
 {
-    public synchronized String
-    name(Current c)
+    public synchronized String name(Current c)
     {
         if(_destroyed)
         {
@@ -21,14 +20,12 @@ public class FileI extends _FileDisp implements NodeI
         return _name;
     }
 
-    public Identity
-    id()
+    public Identity id()
     {
         return _id;
     }
 
-    public synchronized String[]
-    read(Current c)
+    public synchronized String[] read(Current c)
     {
         if(_destroyed)
         {
@@ -38,8 +35,7 @@ public class FileI extends _FileDisp implements NodeI
         return _lines;
     }
 
-    public synchronized void
-    write(String[] text, Current c)
+    public synchronized void write(String[] text, Current c)
     {
         if(_destroyed)
         {
@@ -49,8 +45,7 @@ public class FileI extends _FileDisp implements NodeI
         _lines = (String[])text.clone();
     }
 
-    public void
-    destroy(Current c)
+    public void destroy(Current c)
     {
         synchronized(this)
         {

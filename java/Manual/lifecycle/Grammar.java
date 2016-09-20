@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -12,8 +12,7 @@ class Grammar
         _scanner = new Scanner(_parser);
     }
 
-    void
-    parse()
+    void parse()
     {
         while(true)
         {
@@ -170,8 +169,7 @@ class Grammar
         }
     }
 
-    private java.util.LinkedList<String>
-    strings()
+    private java.util.LinkedList<String> strings()
     {
         java.util.LinkedList<String> l = new java.util.LinkedList<String>();
         while(true)

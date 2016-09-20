@@ -27,22 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(LOCALAPPDATA)\ZeroC\IceBuilder\IceBuilder.Cpp.props" />
@@ -75,10 +79,10 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)\$(PlatformName)\$(ProjectName)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">registryplugin37d</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">registryplugin37d</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">registryplugin37</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">registryplugin37</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">registryplugin37a3d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">registryplugin37a3d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">registryplugin37a3</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">registryplugin37a3</TargetName>
   </PropertyGroup>
   <PropertyGroup Label="IceBuilder">
     <IceBuilderOutputDir>generated\plugin</IceBuilderOutputDir>
@@ -105,13 +109,12 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>setargv.obj;glacier2d.lib;icegridd.lib;iced.lib;iceutild.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>registryplugin37d.dll</OutputFile>
+      <OutputFile>registryplugin37a3d.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>registryplugin37d.lib</ImportLibrary>
+      <ImportLibrary>registryplugin37a3d.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <IceBuilder />
@@ -142,13 +145,12 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>setargv.obj;glacier2d.lib;icegridd.lib;iced.lib;iceutild.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>registryplugin37d.dll</OutputFile>
+      <OutputFile>registryplugin37a3d.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>registryplugin37d.lib</ImportLibrary>
+      <ImportLibrary>registryplugin37a3d.lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <IceBuilder />
@@ -175,12 +177,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO /IGNORE:4089 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>setargv.obj;glacier2.lib;icegrid.lib;ice.lib;iceutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>registryplugin37.dll</OutputFile>
+      <OutputFile>registryplugin37a3.dll</OutputFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>registryplugin37.lib</ImportLibrary>
+      <ImportLibrary>registryplugin37a3.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <IceBuilder />
@@ -211,12 +212,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO /IGNORE:4089 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>setargv.obj;glacier2.lib;icegrid.lib;ice.lib;iceutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>registryplugin37.dll</OutputFile>
+      <OutputFile>registryplugin37a3.dll</OutputFile>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
-      <ImportLibrary>registryplugin37.lib</ImportLibrary>
+      <ImportLibrary>registryplugin37a3.lib</ImportLibrary>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>

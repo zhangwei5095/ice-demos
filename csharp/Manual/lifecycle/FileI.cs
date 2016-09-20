@@ -1,13 +1,12 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 using System;
 using Ice;
 using Filesystem;
-using FilesystemI;
 
 namespace FilesystemI
 {
@@ -53,7 +52,7 @@ namespace FilesystemI
                 }
 
                 _lines = new string[text.Length];
-                text.CopyTo((string[])_lines, 0);
+                text.CopyTo(_lines, 0);
             }
         }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -37,11 +37,11 @@ class Client(Ice.Application):
             return 1
 
         adapter = self.communicator().createObjectAdapter("Callback.Client")
-        adapter.add(CallbackReceiverI(), self.communicator().stringToIdentity("callbackReceiver"))
+        adapter.add(CallbackReceiverI(), Ice.stringToIdentity("callbackReceiver"))
         adapter.activate()
 
         receiver = Demo.CallbackReceiverPrx.uncheckedCast(
-            adapter.createProxy(self.communicator().stringToIdentity("callbackReceiver")))
+            adapter.createProxy(Ice.stringToIdentity("callbackReceiver")))
 
         menu()
 

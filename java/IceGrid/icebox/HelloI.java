@@ -1,12 +1,12 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 import Demo.*;
 
-public class HelloI extends _HelloDisp
+public class HelloI implements Hello
 {
     HelloI(String serviceName)
     {
@@ -14,8 +14,7 @@ public class HelloI extends _HelloDisp
     }
 
     @Override
-    public void
-    sayHello(Ice.Current current)
+    public void sayHello(com.zeroc.Ice.Current current)
     {
         java.util.Map<String,String> env =  System.getenv();
         String lang = env.containsKey("LANG") ? env.get("LANG") : "en";

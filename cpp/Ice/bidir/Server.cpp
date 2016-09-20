@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -35,7 +35,7 @@ CallbackServer::run(int argc, char*[])
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Callback.Server");
     CallbackSenderIPtr sender = new CallbackSenderI(communicator());
-    adapter->add(sender, communicator()->stringToIdentity("sender"));
+    adapter->add(sender, Ice::stringToIdentity("sender"));
     adapter->activate();
 
     sender->start();

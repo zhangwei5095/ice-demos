@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -27,7 +27,7 @@ public class Client
                 return 1;
             }
 
-            InitialPrx initial = InitialPrxHelper.checkedCast(communicator().propertyToProxy("Initial.Proxy"));
+            var initial = InitialPrxHelper.checkedCast(communicator().propertyToProxy("Initial.Proxy"));
             if(initial == null)
             {
                 Console.Error.WriteLine("invalid object reference");
@@ -56,10 +56,10 @@ public class Client
             try
             {
                 initial.getPrinter(out printer, out printerProxy);
-                Console.Error.WriteLine("Did not get the expected NoObjectFactoryException!");
+                Console.Error.WriteLine("Did not get the expected NoValueFactoryException!");
                 return 1;
             }
-            catch(Ice.NoObjectFactoryException ex)
+            catch(Ice.NoValueFactoryException ex)
             {
                 Console.Out.WriteLine("==> " + ex);
             }
@@ -71,8 +71,7 @@ public class Client
             Console.Out.WriteLine("[press enter]");
             Console.In.ReadLine();
 
-            Ice.ObjectFactory factory = new ObjectFactory();
-            communicator().addObjectFactory(factory, Demo.Printer.ice_staticId());
+            communicator().getValueFactoryManager().add(ValueFactory.create, Demo.Printer.ice_staticId());
 
             initial.getPrinter(out printer, out printerProxy);
             Console.Out.WriteLine("==> " + printer.message);
@@ -113,10 +112,10 @@ public class Client
             Console.Out.WriteLine("[press enter]");
             Console.In.ReadLine();
 
-            communicator().addObjectFactory(factory, Demo.DerivedPrinter.ice_staticId());
+            communicator().getValueFactoryManager().add(ValueFactory.create, Demo.DerivedPrinter.ice_staticId());
 
-            derivedAsBase = initial.getDerivedPrinter();
-            DerivedPrinter derived = (DerivedPrinter)derivedAsBase;
+
+            var derived = (DerivedPrinter)initial.getDerivedPrinter();
 
             Console.Out.WriteLine("==> class cast to derived object succeeded");
             Console.Out.WriteLine("==> The type ID of the received object is \"" + derived.ice_id() + "\"");
@@ -141,12 +140,13 @@ public class Client
             Console.Out.WriteLine("[press enter]");
             Console.In.ReadLine();
 
-	    ClientPrinter clientp = new ClientPrinterI();
-	    clientp.message = "a message 4 u";
-            communicator().addObjectFactory(factory, Demo.ClientPrinter.ice_staticId());
+            ClientPrinter clientp = new ClientPrinterI();
+            clientp.message = "a message 4 u";
+            communicator().getValueFactoryManager().add(ValueFactory.create, Demo.ClientPrinter.ice_staticId());
 
-	    derivedAsBase = initial.updatePrinterMessage(clientp);
-	    clientp = (ClientPrinter)derivedAsBase;
+            derivedAsBase = initial.updatePrinterMessage(clientp);
+            clientp = (ClientPrinter)derivedAsBase;
+
             Console.Out.WriteLine("==> " + clientp.message);
 
             Console.Out.WriteLine();
@@ -181,7 +181,7 @@ public class Client
 
     public static int Main(string[] args)
     {
-        App app = new App();
+        var app = new App();
         return app.main(args, "config.client");
     }
 }

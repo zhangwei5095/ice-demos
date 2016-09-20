@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -171,7 +171,7 @@ class Server(Ice.Application):
         reaper = ReapThread()
         reaper.start()
         try:
-            adapter.add(SessionFactoryI(reaper), self.communicator().stringToIdentity("SessionFactory"))
+            adapter.add(SessionFactoryI(reaper), Ice.stringToIdentity("SessionFactory"))
             adapter.activate()
             self.communicator().waitForShutdown()
         finally:

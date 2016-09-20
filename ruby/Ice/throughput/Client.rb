@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -165,7 +165,7 @@ class Client < Ice::Application
                     elsif currentType == '4'
                         print "fixed-length struct "
                     end
-                    
+
                     if c == 'o'
                         printf "sequences of size %d as oneway...\n", seqSize
                     else
@@ -248,6 +248,8 @@ class Client < Ice::Application
                     puts "unknown command `" + c + "'"
                     menu()
                 end
+            rescue Ice::Exception => ex
+                puts ex
             rescue EOFError
                 break
             end

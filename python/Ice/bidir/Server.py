@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -39,7 +39,7 @@ class CallbackSenderI(Demo.CallbackSender, threading.Thread):
     def addClient(self, ident, current=None):
         self._cond.acquire()
 
-        print("adding client `" + self._communicator.identityToString(ident) + "'")
+        print("adding client `" + Ice.identityToString(ident) + "'")
 
         client = Demo.CallbackReceiverPrx.uncheckedCast(current.con.createProxy(ident))
         self._clients.append(client)
@@ -67,7 +67,7 @@ class CallbackSenderI(Demo.CallbackSender, threading.Thread):
                     try:
                         p.callback(num)
                     except:
-                        print("removing client `" + self._communicator.identityToString(p.ice_getIdentity()) + "':")
+                        print("removing client `" + Ice.identityToString(p.ice_getIdentity()) + "':")
                         traceback.print_exc()
 
                         self._cond.acquire()
@@ -84,7 +84,7 @@ class Server(Ice.Application):
 
         adapter = self.communicator().createObjectAdapter("Callback.Server")
         sender = CallbackSenderI(self.communicator())
-        adapter.add(sender, self.communicator().stringToIdentity("sender"))
+        adapter.add(sender, Ice.stringToIdentity("sender"))
         adapter.activate()
 
         sender.start()

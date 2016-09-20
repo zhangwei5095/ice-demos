@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -43,7 +43,7 @@ AsyncServer::run(int argc, char*[])
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Hello");
     _workQueue = new WorkQueue();
     Demo::HelloPtr hello = new HelloI(_workQueue);
-    adapter->add(hello, communicator()->stringToIdentity("hello"));
+    adapter->add(hello, Ice::stringToIdentity("hello"));
 
     _workQueue->start();
     adapter->activate();

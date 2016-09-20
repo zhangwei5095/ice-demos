@@ -1,37 +1,29 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
-var Ice = require("ice").Ice;
-var Demo = require("./Hello").Demo;
+const Ice = require("ice").Ice;
+const Demo = require("./Hello").Demo;
     
-var communicator;
+let communicator;
  
-Ice.Promise.try(
-    function()
+Ice.Promise.try(() =>
     {
         //
         // Initialize the communicator and create a proxy to the hello object.
         //
         communicator = Ice.initialize(process.argv);
-        var proxy = communicator.stringToProxy("hello:tcp -h localhost -p 10000");
         
         //
-        // Down-cast the proxy to the hello object interface.
+        // Down-cast the proxy to the hello object interface and invoke 
+        // the sayHello method.
         //
-        return Demo.HelloPrx.checkedCast(proxy).then(
-            function(hello)
-            {
-                //
-                // Invoke the sayHello method.
-                //
-                return hello.sayHello();
-            });
+        return Demo.HelloPrx.checkedCast(communicator.stringToProxy("hello:tcp -h localhost -p 10000")).then(
+            hello => hello.sayHello());
     }
-).finally(
-    function()
+).finally(() =>
     {
         //
         // Destroy the communicator if required.
@@ -41,8 +33,7 @@ Ice.Promise.try(
             return communicator.destroy();
         }
     }
-).exception(
-    function(ex)
+).catch(ex =>
     {
         //
         // Handle any exceptions above.

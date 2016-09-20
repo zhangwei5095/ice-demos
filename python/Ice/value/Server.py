@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -51,11 +51,10 @@ class Server(Ice.Application):
             print(self.appName() + ": too many arguments")
             return 1
 
-        factory = Printer.ObjectFactory()
-        self.communicator().addObjectFactory(factory, Demo.Printer.ice_staticId())
+        self.communicator().getValueFactoryManager().add(Printer.ValueFactory, Demo.Printer.ice_staticId())
 
         adapter = self.communicator().createObjectAdapter("Value")
-        adapter.add(InitialI(adapter), self.communicator().stringToIdentity("initial"))
+        adapter.add(InitialI(adapter), Ice.stringToIdentity("initial"))
         adapter.activate()
         self.communicator().waitForShutdown()
         return 0

@@ -2,7 +2,7 @@
 
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -160,7 +160,7 @@ NL	[\n]
     string s;
     while(true)
     {
-	char c = static_cast<char>(yyinput());
+	int c = yyinput();
 	if(c == '"')
 	{
 	    break;
@@ -172,7 +172,7 @@ NL	[\n]
 	}
 	else if(c == '\\')
 	{
-	    char next = static_cast<char>(yyinput());
+	    int next = yyinput();
 	    switch(next)
 	    {
 		case '\\':
@@ -234,7 +234,7 @@ NL	[\n]
     string s;
     while(true)
     {
-	char c = static_cast<char>(yyinput());
+	int c = yyinput();
 	if(c == '\'')
 	{
 	    break;
@@ -260,7 +260,7 @@ NL	[\n]
     s += yytext[0];
     while(true)
     {
-	char c = static_cast<char>(yyinput());
+	int c = yyinput();
 	if(c == EOF)
 	{
 	    break;

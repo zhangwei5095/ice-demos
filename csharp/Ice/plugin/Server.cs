@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -21,7 +21,7 @@ public class Server
         {
             if(args.Length > 0)
             {
-                System.Console.Error.WriteLine(appName() + ": too many arguments");
+                Console.Error.WriteLine(appName() + ": too many arguments");
                 return 1;
             }
 
@@ -32,7 +32,7 @@ public class Server
 
     public static int Main(string[] args)
     {
-        App app = new App();
+        var app = new App();
         return app.main(args, "config.server");
     }
 }

@@ -1,6 +1,6 @@
 ﻿// **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -64,7 +64,7 @@ hello::MainPage::updateProxy()
         return;
     }
 
-    string h = IceUtil::wstringToString(hostname->Text->Data());
+    string h = Ice::wstringToString(hostname->Text->Data());
     if (h.empty() && !useDiscovery->IsChecked->Value)
     {
         print("Host is empty.");
@@ -188,13 +188,19 @@ hello::MainPage::hello_Click(Platform::Object^ sender, Windows::UI::Xaml::Routed
                                                 {
                                                     try
                                                     {
-                                                        Ice::IPConnectionInfoPtr info =
-                                                            Ice::IPConnectionInfoPtr::dynamicCast(
-                                                                _helloPrx->ice_getCachedConnection()->getInfo());
-                                                        if(info)
+                                                        // Loop through the connection informations until we find an
+                                                        // IPConnectionInfo class.
+                                                        for(Ice::ConnectionInfoPtr info = connection->getInfo(); info;
+                                                            info = info.underlying)
                                                         {
-                                                            hostname->Text = ref new String(
-                                                                IceUtil::stringToWstring(info->remoteAddress).c_str());
+                                                            Ice::IPConnectionInfoPtr ipinfo =
+                                                                Ice::IPConnectionInfoPtr::dynamicCast(info);
+                                                            if(ipinfo)
+                                                            {
+                                                                hostname->Text = ref new String(
+                                                                    Ice::stringToWstring(info->remoteAddress).c_str());
+                                                                break;
+                                                            }
                                                         }
                                                     }
                                                     catch(const Ice::LocalException&)
@@ -369,5 +375,5 @@ void hello::MainPage::useDiscovery_Changed(Platform::Object^ sender, Windows::UI
 void
 MainPage::print(const std::string& message)
 {
-    output->Text = ref new String(IceUtil::stringToWstring(message).c_str());
+    output->Text = ref new String(Ice::stringToWstring(message).c_str());
 }

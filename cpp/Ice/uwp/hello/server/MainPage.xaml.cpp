@@ -1,6 +1,6 @@
 ﻿// **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -65,17 +65,28 @@ MainPage::MainPage()
 {
     InitializeComponent();
 
-    Ice::InitializationData id;
-	id.properties = Ice::createProperties();
-	id.properties->setProperty("Hello.Endpoints", "tcp -p 10000:ssl -p 10001:udp -p 10000");
-	id.properties->setProperty("Ice.Trace.Network", "2");
+    try
+    {
+        Ice::InitializationData id;
+        id.properties = Ice::createProperties();
+        id.properties->setProperty("Hello.Endpoints", "tcp -p 10000:ssl -p 10001:udp -p 10000");
+        id.properties->setProperty("Ice.Trace.Network", "2");
 
-	_communicator = Ice::initialize(id);
-	_adapter = _communicator->createObjectAdapter("Hello");
-	_adapter->add(new HelloI(this), _communicator->stringToIdentity("hello"));
-	_adapter->activate();
-	print(ref new String(L"Ready to receive requests\n"));
-}
+        _communicator = Ice::initialize(id);
+        _adapter = _communicator->createObjectAdapter("Hello");
+        _adapter->add(new HelloI(this), _Ice::stringToIdentity("hello"));
+        _adapter->activate();
+        print(ref new String(L"Ready to receive requests\n"));
+    }
+    catch(const std::exception& ex)
+    {
+        ostringstream os;
+        os << "Server initialization failed with exception:\n";
+        os << ex.what();
+        wstring msg = Ice::stringToWstring(os.str());
+        print(ref new String(msg.c_str()));
+    }
+}   
 
 void
 MainPage::clear_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)

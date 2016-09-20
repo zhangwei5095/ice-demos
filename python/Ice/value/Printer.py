@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -18,19 +18,14 @@ class DerivedPrinterI(Demo.DerivedPrinter, PrinterI):
 class ClientPrinterI(Demo.ClientPrinter, PrinterI):
     pass
 
-class ObjectFactory(Ice.ObjectFactory):
-    def create(self, type):
-        if type == Demo.Printer.ice_staticId():
-            return PrinterI()
+def ValueFactory(type):
+    if type == Demo.Printer.ice_staticId():
+        return PrinterI()
 
-        if type == Demo.DerivedPrinter.ice_staticId():
-            return DerivedPrinterI()
+    if type == Demo.DerivedPrinter.ice_staticId():
+        return DerivedPrinterI()
 
-        if type == Demo.ClientPrinter.ice_staticId():
-            return ClientPrinterI()
+    if type == Demo.ClientPrinter.ice_staticId():
+        return ClientPrinterI()
 
-        assert(False)
-
-    def destroy(self):
-        # Nothing to do
-        pass
+    assert(False)

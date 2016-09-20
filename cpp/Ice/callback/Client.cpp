@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -72,11 +72,11 @@ CallbackClient::run(int argc, char*[])
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Callback.Client");
     CallbackReceiverPtr cr = new CallbackReceiverI;
-    adapter->add(cr, communicator()->stringToIdentity("callbackReceiver"));
+    adapter->add(cr, Ice::stringToIdentity("callbackReceiver"));
     adapter->activate();
 
     CallbackReceiverPrx receiver = CallbackReceiverPrx::uncheckedCast(
-        adapter->createProxy(communicator()->stringToIdentity("callbackReceiver")));
+        adapter->createProxy(Ice::stringToIdentity("callbackReceiver")));
 
     menu();
 

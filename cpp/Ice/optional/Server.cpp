@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -38,7 +38,7 @@ ContactServer::run(int argc, char*[])
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("ContactDB");
     Demo::ContactDBPtr contactdb = new ContactDBI;
-    adapter->add(contactdb, communicator()->stringToIdentity("contactdb"));
+    adapter->add(contactdb, Ice::stringToIdentity("contactdb"));
     adapter->activate();
     communicator()->waitForShutdown();
     return EXIT_SUCCESS;

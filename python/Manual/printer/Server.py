@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -20,7 +20,7 @@ try:
     ic = Ice.initialize(sys.argv)
     adapter = ic.createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -h localhost -p 10000")
     object = PrinterI()
-    adapter.add(object, ic.stringToIdentity("SimplePrinter"))
+    adapter.add(object, Ice.stringToIdentity("SimplePrinter"))
     adapter.activate()
     ic.waitForShutdown()
 except:

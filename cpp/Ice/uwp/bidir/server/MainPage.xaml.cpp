@@ -1,6 +1,6 @@
 ﻿// **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -31,7 +31,7 @@ CallbackSenderI::addClient(const Ice::Identity& ident, const Ice::Current& curre
 
 	ostringstream os;
 	os << "adding client `";
-	os << _communicator->identityToString(ident);
+	os << Ice::identityToString(ident);
 	os << "'\n";
 	_page->print(os.str());
 
@@ -66,7 +66,7 @@ CallbackSenderI::run()
 				{
 					ostringstream os;
 					os << "removing client `";
-					os << _communicator->identityToString((*p)->ice_getIdentity());
+					os << Ice::identityToString((*p)->ice_getIdentity());
 					os << "':\n";
 					os << ex;
 					os << "\n";
@@ -83,35 +83,44 @@ CallbackSenderI::run()
 MainPage::MainPage()
 {
     InitializeComponent();
+    try
+    {
+        Ice::InitializationData id;
+        id.properties = Ice::createProperties();
+        id.properties->setProperty("Callback.Server.Endpoints", "tcp -p 10000:ws -p 10002");
+        id.properties->setProperty("Ice.Trace.Network", "2");
 
-	Ice::InitializationData id;
-	id.properties = Ice::createProperties();
-	id.properties->setProperty("Callback.Server.Endpoints", "tcp -p 10000:ws -p 10002");
-	id.properties->setProperty("Ice.Trace.Network", "2");
+        _communicator = Ice::initialize(id);
+        _adapter = _communicator->createObjectAdapter("Callback.Server");
+        CallbackSenderIPtr sender = new CallbackSenderI(this, _communicator);
+        _adapter->add(sender, _Ice::stringToIdentity("sender"));
+        _adapter->activate();
 
-	_communicator = Ice::initialize(id);
-	_adapter = _communicator->createObjectAdapter("Callback.Server");
-	CallbackSenderIPtr sender = new CallbackSenderI(this, _communicator);
-	_adapter->add(sender, _communicator->stringToIdentity("sender"));
-	_adapter->activate();
-
-	sender->start();
+        sender->start();
+    }
+    catch(const std::exception& ex)
+    {
+        ostringstream os;
+        os << "Server initialization failed with exception:\n";
+        os << ex.what();
+        print(os.str());
+    }
 }
 
 void 
 bidir::MainPage::print(const std::string& message)
 {
-    this->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, 
-                    ref new DispatchedHandler(
-                            [=] ()
-                                {
-                                    output->Text += ref new String(IceUtil::stringToWstring(message).c_str());
-                                    output->UpdateLayout();
+	this->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, 
+					ref new DispatchedHandler(
+							[=] ()
+								{
+									output->Text += ref new String(Ice::stringToWstring(message).c_str());
+									output->UpdateLayout();
 #if (_WIN32_WINNT > 0x0602)
-                                    scroller->ChangeView(nullptr, scroller->ScrollableHeight, nullptr);
+									scroller->ChangeView(nullptr, scroller->ScrollableHeight, nullptr);
 #else
-                                    scroller->ScrollToVerticalOffset(scroller->ScrollableHeight);
+									scroller->ScrollToVerticalOffset(scroller->ScrollableHeight);
 #endif
-                                }, 
-                            CallbackContext::Any));
+								}, 
+							CallbackContext::Any));
 }

@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -145,9 +145,9 @@ LocatorServer::run(int argc, char*[])
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Locator");
     LocatorRegistryIPtr registry = new LocatorRegistryI;
     Ice::LocatorRegistryPrx registryPrx =
-        Ice::LocatorRegistryPrx::uncheckedCast(adapter->add(registry, communicator()->stringToIdentity("registry")));
+        Ice::LocatorRegistryPrx::uncheckedCast(adapter->add(registry, Ice::stringToIdentity("registry")));
     Ice::LocatorPtr locator = new LocatorI(registry, registryPrx);
-    adapter->add(locator, communicator()->stringToIdentity("locator"));
+    adapter->add(locator, Ice::stringToIdentity("locator"));
     adapter->activate();
     communicator()->waitForShutdown();
     return EXIT_SUCCESS;

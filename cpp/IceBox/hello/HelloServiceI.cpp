@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -37,7 +37,7 @@ HelloServiceI::start(const string& name, const Ice::CommunicatorPtr& communicato
 {
     _adapter = communicator->createObjectAdapter(name);
     Demo::HelloPtr hello = new HelloI;
-    _adapter->add(hello, communicator->stringToIdentity("hello"));
+    _adapter->add(hello, Ice::stringToIdentity("hello"));
     _adapter->activate();
 }
 

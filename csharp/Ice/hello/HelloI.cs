@@ -1,10 +1,11 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 using Demo;
+using System;
 
 public class HelloI : HelloDisp_
 {
@@ -14,12 +15,12 @@ public class HelloI : HelloDisp_
         {
             System.Threading.Thread.Sleep(delay);
         }
-        System.Console.Out.WriteLine("Hello World!");
+        Console.Out.WriteLine("Hello World!");
     }
     
     public override void shutdown(Ice.Current current)
     {
-        System.Console.Out.WriteLine("Shutting down...");
+        Console.Out.WriteLine("Shutting down...");
         current.adapter.getCommunicator().shutdown();
     }
 }

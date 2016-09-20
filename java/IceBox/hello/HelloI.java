@@ -1,16 +1,15 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
 import Demo.*;
 
-public class HelloI extends _HelloDisp
+public class HelloI implements Hello
 {
     @Override
-    public void
-    sayHello(Ice.Current current)
+    public void sayHello(com.zeroc.Ice.Current current)
     {
         System.out.println("Hello World!");
     }

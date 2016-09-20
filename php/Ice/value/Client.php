@@ -1,7 +1,7 @@
 <?php
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -39,7 +39,7 @@ class ClientPrinterI extends Demo_ClientPrinter
     }
 }
 
-class ObjectFactory implements Ice_ObjectFactory
+class ValueFactory implements Ice_ValueFactory
 {
     function create($type)
     {
@@ -60,10 +60,6 @@ class ObjectFactory implements Ice_ObjectFactory
 
         assert(false);
         return null;
-    }
-
-    function destroy()
-    {
     }
 }
 
@@ -92,9 +88,9 @@ try
     try
     {
         $initial->getPrinter($printer, $printerProxy);
-        die("Did not get the expected NoObjectFactoryException!");
+        die("Did not get the expected NoValueFactoryException!");
     }
-    catch(Ice_NoObjectFactoryException $ex)
+    catch(Ice_NoValueFactoryException $ex)
     {
         print_r($ex);
     }
@@ -106,8 +102,8 @@ try
     echo "[press enter]\n";
     fgets(STDIN);
 
-    $factory = new ObjectFactory;
-    $ICE->addObjectFactory($factory, Demo_Printer::ice_staticId());
+    $factory = new ValueFactory;
+    $ICE->getValueFactoryManager()->add($factory, Demo_Printer::ice_staticId());
 
     $initial->getPrinter($printer, $printerProxy);
     echo "==> ",$printer->message,"\n";
@@ -148,7 +144,7 @@ try
     echo "[press enter]\n";
     fgets(STDIN);
 
-    $ICE->addObjectFactory($factory, Demo_DerivedPrinter::ice_staticId());
+    $ICE->getValueFactoryManager()->add($factory, Demo_DerivedPrinter::ice_staticId());
 
     $derivedAsBase = $initial->getDerivedPrinter();
     assert($derivedAsBase instanceof Demo_DerivedPrinter);
@@ -176,7 +172,7 @@ try
 
     $clientp = new ClientPrinterI();
     $clientp->message = "a message 4 u";
-    $ICE->addObjectFactory($factory, Demo_ClientPrinter::ice_staticId());
+    $ICE->getValueFactoryManager()->add($factory, Demo_ClientPrinter::ice_staticId());
 
     $derivedAsBase = $initial->updatePrinterMessage($clientp);
     assert($derivedAsBase instanceof Demo_ClientPrinter);

@@ -1,6 +1,6 @@
 # **********************************************************************
 #
-# Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
 # **********************************************************************
 
@@ -16,7 +16,7 @@ USE_NAMESPACES		= no
 # Don't change anything below this line!
 # ----------------------------------------------------------------------
 
-VERSION		= 3.7.0
+VERSION		= 3.7a2
 
 #
 # Common definitions

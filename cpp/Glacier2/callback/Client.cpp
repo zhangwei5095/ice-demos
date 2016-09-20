@@ -1,6 +1,6 @@
 // **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -193,7 +193,7 @@ CallbackClient::runWithSession(int argc, char*[])
                 onewayR = CallbackReceiverPrx::uncheckedCast(onewayR->ice_identity(callbackReceiverIdent));
             }
 
-            cout << "callback receiver identity: " << communicator()->identityToString(twowayR->ice_getIdentity())
+            cout << "callback receiver identity: " << Ice::identityToString(twowayR->ice_getIdentity())
                  << endl;
         }
         else if(c == 's')

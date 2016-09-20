@@ -1,6 +1,6 @@
 ﻿// **********************************************************************
 //
-// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 //
 // **********************************************************************
 
@@ -18,7 +18,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ZeroC, Inc.")]
 [assembly: AssemblyProduct("Ice.wpf.client")]
-[assembly: AssemblyCopyright("Copyright (c) 2003-2015 ZeroC, Inc.")]
+[assembly: AssemblyCopyright("Copyright (c) 2003-2016 ZeroC, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -57,5 +57,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.7.0")]
-[assembly: AssemblyFileVersion("3.7.0")]
+[assembly: AssemblyVersion("3.7.53")]
+[assembly: AssemblyFileVersion("3.7.53")]
